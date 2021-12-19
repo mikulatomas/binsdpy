@@ -39,7 +39,8 @@ def sokal_sneath1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     return a / (a + 2 * b + 2 * c)
 
 
-def sokal_michener(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def smc(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Simple Matching Coefficient (SMC) by Sokal & Michener"""
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return (a + d) / (a + b + c + d)
