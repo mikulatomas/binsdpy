@@ -101,4 +101,10 @@ def chord(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     return math.sqrt(2 * (1 - (a / (math.sqrt((a + b) * (a + c))))))
 
 
+def yuleq(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    a, b, c, d = operational_taxonomic_units(x, y)
+
+    return (2 * b * c) / (a * d + b * c)
+
+
 
