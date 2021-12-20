@@ -4,7 +4,7 @@ from .utils import operational_taxonomic_units, BinaryFeatureVector
 
 
 def jaccard(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
-    """Jaccard index
+    """Jaccard similarity
     
     Jaccard, P. (1908).
     Nouvelles recherches sur la distribution florale.
@@ -26,7 +26,7 @@ def jaccard(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
 
 def dice(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
-    """Sørensen–Dice coefficient
+    """Sørensen–Dice similarity
     
     Sorensen, T. A. (1948).
     A method of establishing groups of equal amplitude in plant sociology
@@ -74,7 +74,8 @@ def czekanowski(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
 
 def jaccard_3w(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
-    """
+    """3W Jaccard similarity
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -88,7 +89,7 @@ def jaccard_3w(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
 
 def nei_li(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
-    """Czkanowski similarity
+    """Nei-Li similarity
 
     Same as:
         Sørensen–Dice coefficient
@@ -126,7 +127,7 @@ def sokal_sneath1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
 
 def smc(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
-    """Simple Matching Coefficient (SMC)
+    """Simple Matching Coefficient (SMC) similarity
     
     Sokal, R. R. (1958).
     A statistical method for evaluating systematic relationships. 
@@ -183,37 +184,103 @@ def rogers_tanimoto(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
 
 def faith(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Faith similarity
+
+    Faith, D. P. (1983).
+    Asymmetric binary similarity measures.
+    Oecologia, 57(3), 287-290.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return (a + 0.5 * d) / (a + b + c + d)
 
 
 def gower_legendre(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Gower-Legendre similarity
+
+    Gower, J. C., & Legendre, P. (1986).
+    Metric and Euclidean properties of dissimilarity coefficients.
+    Journal of classification, 3(1), 5-48.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return (a + d) / (a + 0.5 * (b + c) + d)
 
 
 def itersection(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Intersection similarity
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, _, _, _ = operational_taxonomic_units(x, y)
 
     return a
 
 
 def inner_product(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Inner product similarity
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, _, _, d = operational_taxonomic_units(x, y)
 
     return a + d
 
 
 def russell_rao(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Russel-Rao similarity
+
+    Rao, C. R. (1948).
+    The utilization of multiple measurements in problems of biological classification.
+    Journal of the Royal Statistical Society. Series B (Methodological), 10(2), 159-203.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return a / (a + b + c + d)
 
 
 def cosine(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
-    a, b, c, d = operational_taxonomic_units(x, y)
+    """Cosine similarity
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
+    a, b, c, _ = operational_taxonomic_units(x, y)
 
     return a / math.sqrt((a + b) * (a + c))
 
@@ -352,6 +419,19 @@ def sokal_sneath4(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
 
 def gower(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Gower similarity
+    
+    Gower, J. C. (1971).
+    A general coefficient of similarity and some of its properties.
+    Biometrics, 857-871.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return (a + d) / math.sqrt((a + b) * (a + c) * (b + d) * (c + d))
