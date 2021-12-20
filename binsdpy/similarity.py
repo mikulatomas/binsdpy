@@ -4,55 +4,179 @@ from .utils import operational_taxonomic_units, BinaryFeatureVector
 
 
 def jaccard(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Jaccard index
+    
+    Jaccard, P. (1908).
+    Nouvelles recherches sur la distribution florale.
+    Bull. Soc. Vaud. Sci. Nat., 44, 223-270.
+
+    Same as:
+        Tanimoto coefficient
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
     return a / (a + b + c)
 
 
 def dice(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Sørensen–Dice coefficient
+    
+    Sorensen, T. A. (1948).
+    A method of establishing groups of equal amplitude in plant sociology
+    based on similarity of species content and its application to analyses
+    of the vegetation on Danish commons.
+    Biol. Skar., 5, 1-34.
+
+    Dice, L. R. (1945).
+    Measures of the amount of ecologic association between species.
+    Ecology, 26(3), 297-302
+    
+    Same as:
+        Czkanowski similarity
+        Nei-Li similarity
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
     return (2 * a) / (2 * a + b + c)
 
 
 def czekanowski(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Czkanowski similarity
+
+    Same as:
+        Sørensen–Dice coefficient
+        Nei-Li similarity
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
     return (2 * a) / (2 * a + b + c)
 
 
 def jaccard_3w(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
     return (3 * a) / (3 * a + b + c)
 
 
 def nei_li(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Czkanowski similarity
+
+    Same as:
+        Sørensen–Dice coefficient
+        Czkanowski similarity
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
     return (2 * a) / (2 * a + b + c)
 
 
 def sokal_sneath1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Sokal-Sneath similarity (v1)
+    
+    Sneath, P. H., & Sokal, R. R. (1973).
+    Numerical taxonomy.
+    The principles and practice of numerical classification.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
     return a / (a + 2 * b + 2 * c)
 
 
 def smc(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
-    """Simple Matching Coefficient (SMC) by Sokal & Michener"""
+    """Simple Matching Coefficient (SMC)
+    
+    Sokal, R. R. (1958).
+    A statistical method for evaluating systematic relationships. 
+    Univ. Kansas, Sci. Bull., 38, 1409-1438.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return (a + d) / (a + b + c + d)
 
 
 def sokal_sneath2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Sokal-Sneath similarity (v2)
+    
+    Sneath, P. H., & Sokal, R. R. (1973).
+    Numerical taxonomy.
+    The principles and practice of numerical classification.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return (2 * (a + d)) / (2 * a + b + c + 2 * d)
 
 
-def roger_tanimoto(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def rogers_tanimoto(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Roges-Tanimoto similarity
+
+    Rogers, D. J., & Tanimoto, T. T. (1960).
+    A computer program for classifying plants.
+    Science, 132(3434), 1115-1118.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return (a + d) / (a + 2 * (b + c) + d)
@@ -209,6 +333,19 @@ def forbes2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
 
 def sokal_sneath4(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Sokal-Sneath similarity (v4)
+    
+    Sneath, P. H., & Sokal, R. R. (1973).
+    Numerical taxonomy.
+    The principles and practice of numerical classification.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return (a / (a + b) + a / (a + c) + d / (b + d) + d / (b + d)) / 4
@@ -263,12 +400,38 @@ def pearson_heron2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
 
 def sokal_sneath3(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Sokal-Sneath similarity (v3)
+    
+    Sneath, P. H., & Sokal, R. R. (1973).
+    Numerical taxonomy.
+    The principles and practice of numerical classification.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return (a + d) / (b + c)
 
 
 def sokal_sneath5(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Sokal-Sneath similarity (v5)
+    
+    Sneath, P. H., & Sokal, R. R. (1973).
+    Numerical taxonomy.
+    The principles and practice of numerical classification.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, d = operational_taxonomic_units(x, y)
 
     return (a * d) / math.sqrt((a + b) * (a + c) * (b + d) * (c + d))
@@ -315,9 +478,25 @@ def kulczynski1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
 
 def tanimoto(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Tanimoto coefficient
+    
+    Tanimoto, T. T. (1968).
+    An elementary mathematical theory of classification and prediction, IBM Report (November, 1958),
+    cited in: G. Salton, Automatic Information Organization and Retrieval.
+
+    Same as:
+        Jaccard index
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
-    return a / ((a + b) + (a + c) - a)
+    return a / (a + b + c)
 
 
 def disperson(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
