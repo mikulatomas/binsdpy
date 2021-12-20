@@ -809,7 +809,7 @@ def pearson3(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
     n = a + b + c + d
 
-    p = pearson_heron1(x, y)
+    p = pearson_phi(x, y)
 
     return math.sqrt(p / (n + p))
 
@@ -870,9 +870,12 @@ def cole(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    return (math.sqrt(2) * (a * d - b * c)) / math.sqrt(
-        math.pow(a * d - b * c, 2) - (a + b) * (a + c) * (b + d) * (c + d)
-    )
+    if a * d >= b * c:
+        return (a * d - b * c) / ((a + b) * (b + d))
+    elif d >= a:
+        return (a * d - b * c) / ((a + b) * (a + c))
+    else:
+        return (a * d - b * c) / ((b + d) * (c + d))
 
 
 def stiles(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
