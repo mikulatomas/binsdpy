@@ -14,6 +14,9 @@ setup(
     packages=find_packages(),
     python_requires=">=3.6",
     install_requires=["bitsets", "numpy"],
+    extras_require={
+        'test': ['pytest', 'pytest-cov'],
+    },
     long_description=pathlib.Path("README.md").read_text(encoding="utf-8"),
     long_description_content_type="text/markdown",
     classifiers=[
