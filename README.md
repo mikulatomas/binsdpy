@@ -2,6 +2,8 @@
 [![codecov](https://codecov.io/gh/mikulatomas/binsdpy/branch/main/graph/badge.svg?token=HI1I1OVOXK)](https://codecov.io/gh/mikulatomas/binsdpy)
 [![PyPI version](https://badge.fury.io/py/binsdpy.svg)](https://badge.fury.io/py/binsdpy)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 
 # binsdpy - binary similarity and distance measures
 Python implementation of binary similarity and distance measures (see [1]). The `bitsets` (immutable ordered set data type) and `numpy.ndarray` are suported as feature vectors.
