@@ -3,7 +3,7 @@ import bitsets
 import numpy as np
 
 
-BinaryFeatureVector = typing.Union["bitsets.bases.BitSet", "np.ndarray"]
+BinaryFeatureVector = typing.Union["bitsets.bases.MemberBits", "np.ndarray"]
 
 
 def operational_taxonomic_units(
@@ -26,7 +26,7 @@ def operational_taxonomic_units(
         b = np.count_nonzero(not_x & y)
         c = np.count_nonzero(x & not_y)
         d = np.count_nonzero(not_x & not_y)
-    elif isinstance(x, bitsets.bases.BitSet):
+    elif isinstance(x, bitsets.bases.MemberBits):
         Vector = type(x)
         universum = Vector.supremum
 
@@ -38,6 +38,6 @@ def operational_taxonomic_units(
         c = Vector.fromint(x & not_y).count()
         d = Vector.fromint(not_x & not_y).count()
     else:
-        raise ValueError("Function is defined only for 'bitsets.bases.BitSet' or 'np.ndarray'.")
+        raise ValueError("Function is defined only for 'bitsets.bases.MemberBits' or 'np.ndarray'.")
 
     return a, b, c, d
