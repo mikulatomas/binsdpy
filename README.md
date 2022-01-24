@@ -6,7 +6,7 @@
 
 
 # binsdpy - binary similarity and distance measures
-Python implementation of binary similarity and distance measures (see [1]). The `bitsets` (immutable ordered set data type) and `numpy.ndarray` are suported as feature vectors.
+Python implementation of binary similarity (see [1]) and distance measures (see [2]). The `bitsets` (immutable ordered set data type) and `numpy.ndarray` are suported as feature vectors.
 
 ## Example
 Example based on `bitsets`:
@@ -56,6 +56,8 @@ binsdpy requires:
 * numpy
 
 ## Reference
-> [1] Choi, S. S., Cha, S. H., & Tappert, C. C. (2010). A survey of binary similarity and distance measures. Journal of systemics, cybernetics and informatics, 8(1), 43-48.
+> [1] Brusco, M., Cradit, J. D., & Steinley, D. (2021). A comparison of 71 binary similarity coefficients: The effect of base rates. Plos one, 16(4), e0247751.
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0247751
+> [2] Choi, S. S., Cha, S. H., & Tappert, C. C. (2010). A survey of binary similarity and distance measures. Journal of systemics, cybernetics and informatics, 8(1), 43-48.
 http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.352.6123&rep=rep1&type=pdf
 
