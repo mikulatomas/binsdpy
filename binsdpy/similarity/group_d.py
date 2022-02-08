@@ -214,6 +214,30 @@ def cole2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     return (a * d - b * c) / ((a + b) * (b + d))
 
 
+def cole(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Cole similarity
+    
+    Cole, L. C. (1957).
+    The measurement of partial interspecific association.
+    Ecology, 38(2), 226-233.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
+    a, b, c, d = operational_taxonomic_units(x, y)
+
+    if (a * d) >= (b * c):
+        return (a * d - b * c) / ((a + b) * (b + d))
+    elif (a * d) < (b * c) and a <= d:
+        return (a * d - b * c) / ((a + b) * (a + c))
+    else:
+        return (a * d - b * c) / ((b + d) * (c + d))
+
+
 def cohen(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """Cohen similarity
 
@@ -310,7 +334,7 @@ def consonni_todeschini5(x: BinaryFeatureVector, y: BinaryFeatureVector) -> floa
 
 def stiles(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """Stiles similarity
-    
+
     Stiles, H. E. (1961).
     The association factor in information retrieval.
     Journal of the ACM (JACM), 8(2), 271-279.
@@ -328,11 +352,5 @@ def stiles(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
     return math.log10(
         (n * math.pow(abs(a * d - b * c) - (n / 2), 2))
-        / ((a + b)
-        * (a + c)
-        * (b + d)
-        * (c + d))
+        / ((a + b) * (a + c) * (b + d) * (c + d))
     )
-
-
-
