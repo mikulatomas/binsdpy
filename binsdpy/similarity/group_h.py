@@ -203,6 +203,10 @@ def baroni_urbani_buser2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> floa
 def fossum(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """Fossum similarity
 
+    Holliday, J. D., Hu, C. Y., & Willett, P. (2002).
+    Grouping of coefficients for the calculation of inter-molecular similarity and dissimilarity using 2D fragment bit-strings.
+    Combinatorial chemistry & high throughput screening, 5(2), 155-166.
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -214,7 +218,7 @@ def fossum(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
     n = a + b + c + d
 
-    return (n * math.pow(a - 0.5, 2)) / math.sqrt((a + b) * (a + c))
+    return (n * math.pow(a - 0.5, 2)) / ((a + b) * (a + c))
 
 
 def forbes2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:

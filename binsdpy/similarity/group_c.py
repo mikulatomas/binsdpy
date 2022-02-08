@@ -3,8 +3,8 @@ import math
 from binsdpy.utils import operational_taxonomic_units, BinaryFeatureVector
 
 
-def sokal_michener(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
-    """Sokal-Michener similarity
+def smc(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+    """Sokal-Michener similarity 
     
     Sokal, R. R. (1958).
     A statistical method for evaluating systematic relationships.
@@ -19,7 +19,7 @@ def sokal_michener(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    return (a + d) / a + b + c + d
+    return (a + d) / (a + b + c + d)
 
 
 def rogers_tanimoto(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -190,4 +190,4 @@ def hamman(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    return (a + d - b - c) / a + b + c + d
+    return (a + d - b - c) / (a + b + c + d)
