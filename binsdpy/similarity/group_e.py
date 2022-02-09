@@ -19,7 +19,7 @@ def scott(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    return (4 * a * d - math.pow(b + c, 2)) / ((2 * a + b + c) * (2 + d + b + c))
+    return (4 * a * d - (b + c) ** 2) / ((2 * a + b + c) * (2 + d + b + c))
 
 
 def tetrachoric(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:

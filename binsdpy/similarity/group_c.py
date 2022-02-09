@@ -4,7 +4,7 @@ from binsdpy.utils import operational_taxonomic_units, BinaryFeatureVector
 
 
 def smc(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
-    """Sokal-Michener similarity 
+    """Sokal-Michener similarity (also called simple matching coefficient)
     
     Sokal, R. R. (1958).
     A statistical method for evaluating systematic relationships.
@@ -57,7 +57,7 @@ def sokal_sneath2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    return (2 * (a + d)) / (2 * a + b + c + 2 * d)
+    return (2 * (a + d)) / (2 * (a + d) + b + c)
 
 
 def sokal_sneath3(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:

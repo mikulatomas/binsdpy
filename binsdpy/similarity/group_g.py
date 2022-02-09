@@ -17,7 +17,7 @@ def loevinger_h(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    p1 = max(a, b) + max(c, d) + max(a, c) + max(d, b)
+    p1 = max(a, b) + max(c, d) + max(a, c) + max(b, d)
     p2 = max(a + c, b + d) + max(a + b, c + d)
 
     return 1 - (b / ((a + b + c + d) * p1 * p2))
