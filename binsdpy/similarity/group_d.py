@@ -238,7 +238,7 @@ def cole(
     x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
 ) -> float:
     """Cole similarity
-    
+
     Cole, L. C. (1957).
     The measurement of partial interspecific association.
     Ecology, 38(2), 226-233.
@@ -363,9 +363,7 @@ def consonni_todeschini5(
 
     n = a + b + c + d
 
-    return (math.log(1 + a * d) - math.log(1 + b * c)) / math.log(
-        1 + n * n / 4
-    )
+    return (math.log(1 + a * d) - math.log(1 + b * c)) / math.log(1 + n * n / 4)
 
 
 def stiles(
@@ -388,9 +386,6 @@ def stiles(
 
     n = a + b + c + d
 
-    t = abs(a * d - b * c) - .5 * n
+    t = abs(a * d - b * c) - 0.5 * n
 
-    return math.log10(
-        (n * t * t)
-        / ((a + b) * (a + c) * (b + d) * (c + d))
-    )
+    return math.log10((n * t * t) / ((a + b) * (a + c) * (b + d) * (c + d)))

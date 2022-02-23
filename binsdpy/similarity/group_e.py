@@ -49,7 +49,7 @@ def odds_ratio(
     x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
 ) -> float:
     """Odds ratio
-    
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -60,6 +60,3 @@ def odds_ratio(
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * d) / (b * c)
-
-
-

@@ -338,6 +338,3 @@ def yuleq(
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (2 * b * c) / (a * d + b * c)
-
-
-

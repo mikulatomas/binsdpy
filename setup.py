@@ -15,14 +15,14 @@ setup(
     python_requires=">=3.6",
     install_requires=["bitsets", "numpy"],
     extras_require={
-        'test': ['pytest', 'pytest-cov'],
+        "test": ["pytest", "pytest-cov"],
     },
     long_description=pathlib.Path("README.md").read_text(encoding="utf-8"),
     long_description_content_type="text/markdown",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Science/Research",
-        'Intended Audience :: Developers',
+        "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         "Programming Language :: Python :: 3",

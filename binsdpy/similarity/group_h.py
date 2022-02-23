@@ -125,7 +125,7 @@ def hawkins_dotson(
     """
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
-    return .5 * ((a / (a + b + c) + (d / (b + c + d))))
+    return 0.5 * ((a / (a + b + c) + (d / (b + c + d))))
 
 
 def tarantula(

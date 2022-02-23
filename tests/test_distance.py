@@ -20,4 +20,3 @@ def test_distance(distance):
     b_bitset = Colors.frommembers(["red", "yellow"])
 
     assert distance(a_np, b_np) == distance(a_bitset, b_bitset)
-

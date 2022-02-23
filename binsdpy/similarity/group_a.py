@@ -10,7 +10,7 @@ def dice1(
 
     Dice, L. R. (1945).
     Measures of the amount of ecologic association between species.
-    Ecology, 26(3), 297-302    
+    Ecology, 26(3), 297-302
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -31,7 +31,7 @@ def dice2(
 
     Dice, L. R. (1945).
     Measures of the amount of ecologic association between species.
-    Ecology, 26(3), 297-302    
+    Ecology, 26(3), 297-302
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -52,7 +52,7 @@ def jaccard(
 
     Same as:
         Tanimoto coefficient
-    
+
     Jaccard, P. (1908).
     Nouvelles recherches sur la distribution florale.
     Bull. Soc. Vaud. Sci. Nat., 44, 223-270.
@@ -95,9 +95,9 @@ def gleason(
 ) -> float:
     """Gleason similarity
 
-    Gleason, H. A. (1920). 
-    Some applications of the quadrat method. 
-    Bulletin of the Torrey Botanical Club, 47(1), 21-33.  
+    Gleason, H. A. (1920).
+    Some applications of the quadrat method.
+    Bulletin of the Torrey Botanical Club, 47(1), 21-33.
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -150,7 +150,7 @@ def kulczynski2(
     """
     a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
-    return .5 * (a / (a + b) + a / (a + c))
+    return 0.5 * (a / (a + b) + a / (a + c))
 
 
 def ochiai(
@@ -161,11 +161,11 @@ def ochiai(
     Same as:
         Cosine similarity
         Otsuka similarity
-    
+
     Ochiai, A. (1957).
     Zoogeographic studies on the soleoid fishes found in Japan and its neighbouring regions.
     Bulletin of Japanese Society of Scientific Fisheries, 22, 526-530.
-        
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -288,7 +288,7 @@ def sokal_sneath1(
     x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
 ) -> float:
     """Sokal-Sneath similarity (v1)
-    
+
     Sneath, P. H., & Sokal, R. R. (1973).
     Numerical taxonomy.
     The principles and practice of numerical classification.

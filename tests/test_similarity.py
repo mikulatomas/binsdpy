@@ -20,5 +20,3 @@ def test_similarity(similarity):
     b_bitset = Colors.frommembers(["red", "yellow"])
 
     assert similarity(a_np, b_np) == similarity(a_bitset, b_bitset)
-
-
