@@ -3,9 +3,11 @@ import math
 from binsdpy.utils import operational_taxonomic_units, BinaryFeatureVector
 
 
-def smc(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def smc(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Sokal-Michener similarity (also called simple matching coefficient)
-    
+
     Sokal, R. R. (1958).
     A statistical method for evaluating systematic relationships.
     Univ. Kansas, Sci. Bull., 38, 1409-1438.
@@ -17,12 +19,14 @@ def smc(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a + d) / (a + b + c + d)
 
 
-def rogers_tanimoto(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def rogers_tanimoto(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Roges-Tanimoto similarity
 
     Rogers, D. J., & Tanimoto, T. T. (1960).
@@ -36,14 +40,16 @@ def rogers_tanimoto(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a + d) / (a + 2 * (b + c) + d)
 
 
-def sokal_sneath2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def sokal_sneath2(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Sokal-Sneath similarity (v2)
-    
+
     Sneath, P. H., & Sokal, R. R. (1973).
     Numerical taxonomy.
     The principles and practice of numerical classification.
@@ -55,14 +61,16 @@ def sokal_sneath2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (2 * (a + d)) / (2 * (a + d) + b + c)
 
 
-def sokal_sneath3(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def sokal_sneath3(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Sokal-Sneath similarity (v3)
-    
+
     Sneath, P. H., & Sokal, R. R. (1973).
     Numerical taxonomy.
     The principles and practice of numerical classification.
@@ -74,12 +82,14 @@ def sokal_sneath3(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a + d) / (b + c)
 
 
-def faith(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def faith(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Faith similarity
 
     Faith, D. P. (1983).
@@ -93,12 +103,14 @@ def faith(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a + 0.5 * d) / (a + b + c + d)
 
 
-def gower_legendre(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def gower_legendre(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Gower-Legendre similarity
 
     Gower, J. C., & Legendre, P. (1986).
@@ -112,14 +124,16 @@ def gower_legendre(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a + d) / (a + 0.5 * (b + c) + d)
 
 
-def gower(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def gower(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Gower similarity
-    
+
     Gower, J. C. (1971).
     A general coefficient of similarity and some of its properties.
     Biometrics, 857-871.
@@ -131,14 +145,16 @@ def gower(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a + d) / math.sqrt((a + b) * (a + c) * (b + d) * (c + d))
 
 
-def austin_colwell(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def austin_colwell(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Austin-Colwell similarity
-    
+
     Austin, B., & Colwell, R. R. (1977).
     Evaluation of some coefficients for use in numerical taxonomy of microorganisms.
     International Journal of Systematic and Evolutionary Microbiology, 27(3), 204-210.
@@ -150,12 +166,14 @@ def austin_colwell(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return 2 / math.pi * math.asin(math.sqrt((a + d) / (a + b + c + d)))
 
 
-def consonni_todeschini1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def consonni_todeschini1(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Consonni and Todeschini similarity (v1)
 
     Consonni, V., & Todeschini, R. (2012).
@@ -169,12 +187,14 @@ def consonni_todeschini1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> floa
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return math.log(1 + a + d) / math.log(1 + a + b + c + d)
 
 
-def hamman(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def hamman(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Hamman similarity
 
     Hamann, U. (1961).
@@ -188,6 +208,6 @@ def hamman(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a + d - b - c) / (a + b + c + d)

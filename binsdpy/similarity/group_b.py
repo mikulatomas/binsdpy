@@ -3,7 +3,9 @@ import math
 from binsdpy.utils import operational_taxonomic_units, BinaryFeatureVector
 
 
-def russell_rao(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def russell_rao(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Russel-Rao similarity
 
     Russell, P. F., & Rao, T. R. (1940).
@@ -21,12 +23,14 @@ def russell_rao(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return a / (a + b + c + d)
 
 
-def consonni_todeschini3(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def consonni_todeschini3(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Consonni and Todeschini (v3)
 
     Consonni, V., & Todeschini, R. (2012).
@@ -40,6 +44,6 @@ def consonni_todeschini3(x: BinaryFeatureVector, y: BinaryFeatureVector) -> floa
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return math.log(1 + a) / math.log(1 + a + b + c + d)

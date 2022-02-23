@@ -3,7 +3,9 @@ import math
 from binsdpy.utils import operational_taxonomic_units, BinaryFeatureVector
 
 
-def dice1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def dice1(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Dice 1 similarity (v1)
 
     Dice, L. R. (1945).
@@ -17,12 +19,14 @@ def dice1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, _, _ = operational_taxonomic_units(x, y)
+    a, b, _, _ = operational_taxonomic_units(x, y, mask)
 
     return a / (a + b)
 
 
-def dice2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def dice2(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Dice 2 similarity (v2)
 
     Dice, L. R. (1945).
@@ -36,12 +40,14 @@ def dice2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, _, c, _ = operational_taxonomic_units(x, y)
+    a, _, c, _ = operational_taxonomic_units(x, y, mask)
 
     return a / (a + c)
 
 
-def jaccard(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def jaccard(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Jaccard similarity
 
     Same as:
@@ -58,12 +64,14 @@ def jaccard(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return a / (a + b + c)
 
 
-def sw_jaccard(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def sw_jaccard(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """SW Jaccard similarity
 
     Jaccard, P. (1908).
@@ -77,12 +85,14 @@ def sw_jaccard(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return (3 * a) / (3 * a + b + c)
 
 
-def gleason(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def gleason(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Gleason similarity
 
     Gleason, H. A. (1920). 
@@ -96,12 +106,14 @@ def gleason(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return (2 * a) / (2 * a + b + c)
 
 
-def kulczynski1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def kulczynski1(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Kulczynski similarity (v1)
 
     Stanisław Kulczynśki. (1927).
@@ -115,12 +127,14 @@ def kulczynski1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return a / (b + c)
 
 
-def kulczynski2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def kulczynski2(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Kulczynski similarity (v2)
 
     Stanisław Kulczynśki. (1927).
@@ -134,12 +148,14 @@ def kulczynski2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return .5 * (a / (a + b) + a / (a + c))
 
 
-def ochiai(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def ochiai(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Ochiai similarity
 
     Same as:
@@ -158,12 +174,14 @@ def ochiai(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
         float: similarity of given vectors
     """
 
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return a / math.sqrt((a + b) * (a + c))
 
 
-def braun_blanquet(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def braun_blanquet(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Braun-Banquet similarity
 
     Braun-Blanquet, J. (1932).
@@ -177,12 +195,14 @@ def braun_blanquet(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return a / max(a + b, a + c)
 
 
-def simpson(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def simpson(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Simpson similarity
 
     Simpson, E. H. (1949).
@@ -196,12 +216,14 @@ def simpson(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return a / min(a + b, a + c)
 
 
-def sorgenfrei(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def sorgenfrei(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Sorgenfrei similarity
 
     Sorgenfrei, T. (1958).
@@ -215,12 +237,14 @@ def sorgenfrei(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return (a * a) / ((a + b) * (a + c))
 
 
-def mountford(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def mountford(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Mountford similarity
 
     Mountford, M. D. (1962).
@@ -234,12 +258,14 @@ def mountford(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return (2 * a) / (a * b + a * c + 2 * b * c)
 
 
-def fager_mcgowan(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def fager_mcgowan(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Fager-McGowan similarity
 
     Fager, E. W. (1957).
@@ -253,12 +279,14 @@ def fager_mcgowan(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return a / math.sqrt((a + b) * (a + c)) - max(a + b, a + c) / 2
 
 
-def sokal_sneath1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def sokal_sneath1(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Sokal-Sneath similarity (v1)
     
     Sneath, P. H., & Sokal, R. R. (1973).
@@ -272,12 +300,14 @@ def sokal_sneath1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return a / (a + 2 * b + 2 * c)
 
 
-def mcconnaughey(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def mcconnaughey(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """McConnaughey similarity
 
     McConnaughey, B. H. (1964).
@@ -291,12 +321,14 @@ def mcconnaughey(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return (a * a - b * c) / ((a + b) * (a + c))
 
 
-def johnson(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def johnson(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Johnson similarity
 
     Johnson, S. C. (1967).
@@ -310,12 +342,14 @@ def johnson(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return a / (a + b) + a / (a + c)
 
 
-def van_der_maarel(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def van_der_maarel(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Van der Maarel similarity
 
     Van der Maarel, E. (1969).
@@ -329,12 +363,14 @@ def van_der_maarel(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return (2 * a - b - c) / (2 * a + b + c)
 
 
-def consonni_todeschini4(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def consonni_todeschini4(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Consonni and Todeschini (v4)
 
     Consonni, V., & Todeschini, R. (2012).
@@ -348,6 +384,6 @@ def consonni_todeschini4(x: BinaryFeatureVector, y: BinaryFeatureVector) -> floa
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return math.log(1 + a) / math.log(1 + a + b + c)

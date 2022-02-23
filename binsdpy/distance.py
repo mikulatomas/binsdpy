@@ -3,7 +3,9 @@ import math
 from .utils import operational_taxonomic_units, BinaryFeatureVector
 
 
-def hamming(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def hamming(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Hamming distance
 
     Hamming, R. W. (1950).
@@ -17,12 +19,14 @@ def hamming(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    _, b, c, _ = operational_taxonomic_units(x, y)
+    _, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return b + c
 
 
-def euclid(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def euclid(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Euclidean distance
 
     Args:
@@ -32,12 +36,14 @@ def euclid(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    _, b, c, _ = operational_taxonomic_units(x, y)
+    _, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return math.sqrt(b + c)
 
 
-def squared_euclid(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def squared_euclid(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Squared euclidean distance
 
     Args:
@@ -47,12 +53,14 @@ def squared_euclid(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    _, b, c, _ = operational_taxonomic_units(x, y)
+    _, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return math.sqrt(math.pow(b + c, 2))
 
 
-def canberra(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def canberra(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Canberra distance
 
     Lance, G. N., & Williams, W. T. (1966).
@@ -66,12 +74,14 @@ def canberra(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    _, b, c, _ = operational_taxonomic_units(x, y)
+    _, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return b + c
 
 
-def manhattan(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def manhattan(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Manhattan distance
 
     Same as:
@@ -85,12 +95,14 @@ def manhattan(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    _, b, c, _ = operational_taxonomic_units(x, y)
+    _, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return b + c
 
 
-def cityblock(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def cityblock(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Cityblock distance
 
     Same as:
@@ -105,12 +117,14 @@ def cityblock(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
         float: distance of given vectors
     """
 
-    _, b, c, _ = operational_taxonomic_units(x, y)
+    _, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return b + c
 
 
-def minkowski(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def minkowski(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Minkowski distance
 
     Same as:
@@ -124,12 +138,14 @@ def minkowski(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    _, b, c, _ = operational_taxonomic_units(x, y)
+    _, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return b + c
 
 
-def mean_manhattan(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def mean_manhattan(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Mean manhattan distance
 
     Args:
@@ -139,12 +155,14 @@ def mean_manhattan(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (b + c) / (a + b + c + d)
 
 
-def vari(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def vari(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Vari distance
 
     Args:
@@ -154,12 +172,14 @@ def vari(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (b + c) / (4 * (a + b + c + d))
 
 
-def size_difference(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def size_difference(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Size difference distance
 
     Args:
@@ -169,12 +189,14 @@ def size_difference(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return math.pow(b + c, 2) / math.pow(a + b + c + d, 2)
 
 
-def shape_difference(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def shape_difference(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Shape difference distance
 
     Args:
@@ -184,14 +206,16 @@ def shape_difference(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     n = a + b + c + d
 
     return (n * (b + c) - math.pow(b + c, 2)) / math.pow(n, 2)
 
 
-def pattern_difference(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def pattern_difference(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Pattern difference distance
 
     Args:
@@ -201,12 +225,14 @@ def pattern_difference(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (4 * b * c) / math.pow(a + b + c + d, 2)
 
 
-def lance_williams(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def lance_williams(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Lance-Williams distance
 
     Same as:
@@ -223,12 +249,14 @@ def lance_williams(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return (b + c) / (2 * a + b + c)
 
 
-def bray_curtis(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def bray_curtis(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Bray-Curtis distance
 
     Same as:
@@ -245,12 +273,14 @@ def bray_curtis(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return (b + c) / (2 * a + b + c)
 
 
-def hellinger(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def hellinger(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Hellinger distance
 
     Hellinger, E. (1909).
@@ -264,12 +294,14 @@ def hellinger(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return 2 * math.sqrt((1 - (a / (math.sqrt((a + b) * (a + c))))))
 
 
-def chord(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def chord(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Hellinger distance
 
     Orlóci, L. (1967).
@@ -283,12 +315,14 @@ def chord(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    a, b, c, _ = operational_taxonomic_units(x, y)
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return math.sqrt(2 * (1 - (a / (math.sqrt((a + b) * (a + c))))))
 
 
-def yuleq(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def yuleq(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Yule Q distance
 
     Yule, G. U., & Kendall, M. G. (1958).
@@ -301,7 +335,7 @@ def yuleq(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: distance of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (2 * b * c) / (a * d + b * c)
 
