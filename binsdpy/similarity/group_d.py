@@ -3,7 +3,9 @@ import math
 from binsdpy.utils import operational_taxonomic_units, BinaryFeatureVector
 
 
-def peirce1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def peirce1(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Peirce similarity (v1)
 
     Peirce, C. S. (1884).
@@ -17,12 +19,14 @@ def peirce1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * d - b * c) / ((a + b) * (c + d))
 
 
-def peirce2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def peirce2(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Peirce similarity (v2)
 
     Peirce, C. S. (1884).
@@ -36,12 +40,14 @@ def peirce2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * d - b * c) / ((a + c) * (b + d))
 
 
-def yuleq(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def yuleq(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Yule's Q similarity
 
     Yule, G. U. (1912).
@@ -59,12 +65,14 @@ def yuleq(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * d - b * c) / (a * d + b * c)
 
 
-def yulew(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def yulew(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Yule's W similarity
 
     Yule, G. U. (1912).
@@ -83,12 +91,14 @@ def yulew(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (math.sqrt(a * d) - math.sqrt(b * c)) / (math.sqrt(a * d) + math.sqrt(b * c))
 
 
-def pearson1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def pearson1(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Pearson Chi-Squared similarity
 
     Pearson, K., & Heron, D. (1913).
@@ -106,14 +116,16 @@ def pearson1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     n = a + b + c + d
 
     return (n * ((a * d - b * c) ** 2)) / ((a + b) * (a + c) * (b + d) * (c + d))
 
 
-def pearson2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def pearson2(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Pearson similarity (v2)
 
     Pearson, K., & Heron, D. (1913).
@@ -131,14 +143,16 @@ def pearson2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
-    x_2 = pearson1(x, y)
+    x_2 = pearson1(x, y, mask)
 
     return math.sqrt(x_2 / (a + b + c + d + x_2))
 
 
-def phi(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def phi(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Phi similarity
 
     Yule, G. U. (1912).
@@ -152,12 +166,14 @@ def phi(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * d - b * c) / math.sqrt((a + b) * (a + c) * (b + d) * (c + d))
 
 
-def michael(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def michael(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Michael similarity
 
     Michael, E. L. (1920).
@@ -171,12 +187,14 @@ def michael(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return 4 * (a * d - b * c) / ((a + d) ** 2 + (b + c) ** 2)
 
 
-def cole1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def cole1(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Cole similarity (v1)
 
     Cole, L. C. (1957).
@@ -190,12 +208,14 @@ def cole1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * d - b * c) / ((a + c) * (c + d))
 
 
-def cole2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def cole2(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Cole similarity (v2)
 
     Cole, L. C. (1957).
@@ -209,12 +229,14 @@ def cole2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * d - b * c) / ((a + b) * (b + d))
 
 
-def cole(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def cole(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Cole similarity
     
     Cole, L. C. (1957).
@@ -228,7 +250,7 @@ def cole(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     if (a * d) >= (b * c):
         return (a * d - b * c) / ((a + b) * (b + d))
@@ -238,7 +260,9 @@ def cole(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
         return (a * d - b * c) / ((b + d) * (c + d))
 
 
-def cohen(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def cohen(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Cohen similarity
 
     Cohen, J. (1960).
@@ -252,12 +276,14 @@ def cohen(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (2 * (a * d - b * c)) / math.sqrt((a + b) * (b + d) + (a + c) * (c + d))
 
 
-def maxwell_pilliner(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def maxwell_pilliner(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Maxwell-Pilliner similarity
 
     Maxwell, A. E., & Pilliner, A. E. G. (1968).
@@ -271,12 +297,14 @@ def maxwell_pilliner(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (2 * (a * d - b * c)) / ((a + b) * (c + d) + (a + c) * (b + d))
 
 
-def dennis(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def dennis(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Dennis similarity
 
     Dennis, S. F. (1965).
@@ -291,12 +319,14 @@ def dennis(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * d - b * c) / math.sqrt((a + b + c + d) * (a + b) * (a + c))
 
 
-def disperson(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def disperson(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Disperson similarity
 
     Args:
@@ -306,14 +336,16 @@ def disperson(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     n = a + b + c + d
 
     return (a * d - b * c) / (n * n)
 
 
-def consonni_todeschini5(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def consonni_todeschini5(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Consonni and Todeschini (v5)
 
     Consonni, V., & Todeschini, R. (2012).
@@ -327,7 +359,7 @@ def consonni_todeschini5(x: BinaryFeatureVector, y: BinaryFeatureVector) -> floa
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     n = a + b + c + d
 
@@ -336,7 +368,9 @@ def consonni_todeschini5(x: BinaryFeatureVector, y: BinaryFeatureVector) -> floa
     )
 
 
-def stiles(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def stiles(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Stiles similarity
 
     Stiles, H. E. (1961).
@@ -350,7 +384,7 @@ def stiles(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     n = a + b + c + d
 

@@ -1,7 +1,9 @@
 from binsdpy.utils import operational_taxonomic_units, BinaryFeatureVector
 
 
-def loevinger_h(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def loevinger_h(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Loevinger's H
 
     Loevinger, J. (1948).
@@ -15,7 +17,7 @@ def loevinger_h(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     p1 = max(a, b) + max(c, d) + max(a, c) + max(b, d)
     p2 = max(a + c, b + d) + max(a + b, c + d)

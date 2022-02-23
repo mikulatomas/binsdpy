@@ -3,7 +3,9 @@ import math
 from binsdpy.utils import operational_taxonomic_units, BinaryFeatureVector
 
 
-def rand(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def rand(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Rand index similarity
 
     Rand, W. M. (1971).
@@ -17,7 +19,7 @@ def rand(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     n = a + b + c + d
 
@@ -30,7 +32,9 @@ def rand(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     return (A + B) / N
 
 
-def adjusted_rand(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def adjusted_rand(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Adjusted Rand index similarity
 
     Rand, W. M. (1971).
@@ -44,7 +48,7 @@ def adjusted_rand(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     n = a + b + c + d
 

@@ -3,7 +3,9 @@ import math
 from binsdpy.utils import operational_taxonomic_units, BinaryFeatureVector
 
 
-def scott(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def scott(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Scott similarity
 
     Scott, W. A. (1955).
@@ -17,12 +19,14 @@ def scott(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (4 * a * d - (b + c) ** 2) / ((2 * a + b + c) * (2 + d + b + c))
 
 
-def tetrachoric(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def tetrachoric(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Tetrachoric similarity
 
     Peirce, C. S. (1884).
@@ -36,12 +40,14 @@ def tetrachoric(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return math.cos(180 / (1 + math.sqrt((a * d) / (b * c))))
 
 
-def odds_ratio(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
+def odds_ratio(
+    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+) -> float:
     """Odds ratio
     
     Args:
@@ -51,7 +57,7 @@ def odds_ratio(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     Returns:
         float: similarity of given vectors
     """
-    a, b, c, d = operational_taxonomic_units(x, y)
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * d) / (b * c)
 
