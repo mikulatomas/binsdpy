@@ -24,7 +24,7 @@ def rand(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     N = n * (n - 1) / 2
     B = a * b + c * d
     C = a * c + b * d
-    D = a * d + b * C
+    D = a * d + b * c
     A = N - B - C - D
 
     return (A + B) / N
@@ -51,9 +51,9 @@ def adjusted_rand(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     N = n * (n - 1) / 2
     B = a * b + c * d
     C = a * c + b * d
-    D = a * d + b * C
+    D = a * d + b * c
     A = N - B - C - D
 
     denomi = (A + B) * (A + C) + (C + D) * (B + D)
 
-    return (N * (A + D) - denomi) / (math.pow(N, 2) - denomi)
+    return (N * (A + D) - denomi) / (N * N - denomi)

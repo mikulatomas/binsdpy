@@ -110,7 +110,7 @@ def pearson1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
     n = a + b + c + d
 
-    return (n * math.pow(a * d - b * c, 2)) / ((a + b) * (a + c) * (b + d) * (c + d))
+    return (n * ((a * d - b * c) ** 2)) / ((a + b) * (a + c) * (b + d) * (c + d))
 
 
 def pearson2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -173,7 +173,7 @@ def michael(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    return 4 * (a * d - b * c) / (math.pow(a + d, 2) + math.pow(b + c, 2))
+    return 4 * (a * d - b * c) / ((a + d) ** 2 + (b + c) ** 2)
 
 
 def cole1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -254,7 +254,7 @@ def cohen(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    return (2 * (a * d - b * c)) / math.sqrt((a + b) * (b + d) * (a + c) * (c + d))
+    return (2 * (a * d - b * c)) / math.sqrt((a + b) * (b + d) + (a + c) * (c + d))
 
 
 def maxwell_pilliner(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -273,7 +273,7 @@ def maxwell_pilliner(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    return (2 * (a * d - b * c)) / ((a + b) * (c + d) * (a + c) * (b + d))
+    return (2 * (a * d - b * c)) / ((a + b) * (c + d) + (a + c) * (b + d))
 
 
 def dennis(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -308,7 +308,9 @@ def disperson(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    return (a * d - b * c) / math.pow(a + b + c + d, 2)
+    n = a + b + c + d
+
+    return (a * d - b * c) / (n * n)
 
 
 def consonni_todeschini5(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -327,8 +329,10 @@ def consonni_todeschini5(x: BinaryFeatureVector, y: BinaryFeatureVector) -> floa
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
+    n = a + b + c + d
+
     return (math.log(1 + a * d) - math.log(1 + b * c)) / math.log(
-        1 + math.pow(a + b + c + d, 2) / 4
+        1 + n * n / 4
     )
 
 
@@ -350,7 +354,9 @@ def stiles(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
     n = a + b + c + d
 
+    t = abs(a * d - b * c) - .5 * n
+
     return math.log10(
-        (n * math.pow(abs(a * d - b * c) - (n / 2), 2))
+        (n * t * t)
         / ((a + b) * (a + c) * (b + d) * (c + d))
     )

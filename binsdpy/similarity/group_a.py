@@ -136,7 +136,7 @@ def kulczynski2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
-    return 1/2 * (a / (a + b) + a / (a + c))
+    return .5 * (a / (a + b) + a / (a + c))
 
 
 def ochiai(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -217,7 +217,7 @@ def sorgenfrei(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
-    return math.pow(a, 2) / ((a + b) * (a + c))
+    return (a * a) / ((a + b) * (a + c))
 
 
 def mountford(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -293,7 +293,7 @@ def mcconnaughey(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
-    return (math.pow(a, 2) - b * c) / ((a + b) * (a + c))
+    return (a * a - b * c) / ((a + b) * (a + c))
 
 
 def johnson(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -350,4 +350,4 @@ def consonni_todeschini4(x: BinaryFeatureVector, y: BinaryFeatureVector) -> floa
     """
     a, b, c, _ = operational_taxonomic_units(x, y)
 
-    return (2 * a - b - c) / (2 * a + b + c)
+    return math.log(1 + a) / math.log(1 + a + b + c)

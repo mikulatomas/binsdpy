@@ -113,7 +113,7 @@ def hawkins_dotson(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
     """
     a, b, c, d = operational_taxonomic_units(x, y)
 
-    return ((a / (a + b + c) + (d / (b + c + d)))) / 2
+    return .5 * ((a / (a + b + c) + (d / (b + c + d))))
 
 
 def tarantula(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -218,7 +218,7 @@ def fossum(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
     n = a + b + c + d
 
-    return (n * math.pow(a - 0.5, 2)) / ((a + b) * (a + c))
+    return (n * (a - 0.5) ** 2) / math.sqrt((a + b) * (a + c))
 
 
 def forbes2(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
@@ -264,7 +264,7 @@ def eyraud(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
     n = a + b + c + d
 
-    return (math.pow(n, 2) + (n * a - (a + b) * (a + c))) / (
+    return (n * n * (n * a - (a + b) * (a + c))) / (
         (a + b) * (a + c) * (b + d) * (c + d)
     )
 
@@ -308,7 +308,7 @@ def goodman_kruskal1(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
     n = a + b + c + d
 
-    p1 = max(a, b) + max(c, d) + max(a, c) + max(d, b)
+    p1 = max(a, b) + max(c, d) + max(a, c) + max(b, d)
     p2 = max(a + c, b + d) + max(a + b, c + d)
 
     return (p1 - p2) / (2 * n - p2)
@@ -332,7 +332,7 @@ def anderberg(x: BinaryFeatureVector, y: BinaryFeatureVector) -> float:
 
     n = a + b + c + d
 
-    p1 = max(a, b) + max(c, d) + max(a, c) + max(d, b)
+    p1 = max(a, b) + max(c, d) + max(a, c) + max(b, d)
     p2 = max(a + c, b + d) + max(a + b, c + d)
 
     return (p1 - p2) / (2 * n)
