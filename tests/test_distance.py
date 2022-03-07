@@ -42,4 +42,6 @@ def test_distance_mask(distance):
     b_bitset_masked = ColorsMasked.frommembers(["red", "yellow"])
 
     assert distance(a_np, b_np, mask=mask_np) == distance(a_np_masked, b_np_masked)
-    assert distance(a_bitset, b_bitset, mask=mask_bitset) == distance(a_bitset_masked, b_bitset_masked)
+    assert distance(a_bitset, b_bitset, mask=mask_bitset) == distance(
+        a_bitset_masked, b_bitset_masked
+    )

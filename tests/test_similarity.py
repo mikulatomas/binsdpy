@@ -42,4 +42,6 @@ def test_similarity_mask(similarity):
     b_bitset_masked = ColorsMasked.frommembers(["red", "yellow"])
 
     assert similarity(a_np, b_np, mask=mask_np) == similarity(a_np_masked, b_np_masked)
-    assert similarity(a_bitset, b_bitset, mask=mask_bitset) == similarity(a_bitset_masked, b_bitset_masked)
+    assert similarity(a_bitset, b_bitset, mask=mask_bitset) == similarity(
+        a_bitset_masked, b_bitset_masked
+    )
