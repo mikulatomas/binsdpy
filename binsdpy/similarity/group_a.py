@@ -153,13 +153,13 @@ def kulczynski2(
     return 0.5 * (a / (a + b) + a / (a + c))
 
 
-def ochiai(
+def cosine(
     x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
 ) -> float:
-    """Ochiai similarity
+    """Cosine similarity
 
     Same as:
-        Cosine similarity
+        Ochiai similarity
         Otsuka similarity
 
     Ochiai, A. (1957).
