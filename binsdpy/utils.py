@@ -4,10 +4,13 @@ import numpy as np
 
 
 BinaryFeatureVector = typing.Union["bitsets.bases.MemberBits", "np.ndarray"]
+BinaryFeatureVectorEmpty = typing.Union["bitsets.bases.MemberBits", "np.ndarray", None]
 
 
 def operational_taxonomic_units(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> typing.Tuple[float, float, float, float]:
     """Calculates Operational Taxonomic Units table for two vectors
 

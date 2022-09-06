@@ -1,10 +1,16 @@
 import math
 
-from .utils import operational_taxonomic_units, BinaryFeatureVector
+from binsdpy.utils import (
+    operational_taxonomic_units,
+    BinaryFeatureVector,
+    BinaryFeatureVectorEmpty,
+)
 
 
 def hamming(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Hamming distance
 
@@ -25,7 +31,9 @@ def hamming(
 
 
 def euclid(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Euclidean distance
 
@@ -42,7 +50,9 @@ def euclid(
 
 
 def squared_euclid(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Squared euclidean distance
 
@@ -59,7 +69,9 @@ def squared_euclid(
 
 
 def canberra(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Canberra distance
 
@@ -80,7 +92,9 @@ def canberra(
 
 
 def manhattan(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Manhattan distance
 
@@ -101,7 +115,9 @@ def manhattan(
 
 
 def cityblock(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Cityblock distance
 
@@ -123,7 +139,9 @@ def cityblock(
 
 
 def minkowski(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Minkowski distance
 
@@ -144,7 +162,9 @@ def minkowski(
 
 
 def mean_manhattan(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Mean manhattan distance
 
@@ -161,7 +181,9 @@ def mean_manhattan(
 
 
 def vari(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Vari distance
 
@@ -178,7 +200,9 @@ def vari(
 
 
 def size_difference(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Size difference distance
 
@@ -195,7 +219,9 @@ def size_difference(
 
 
 def shape_difference(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Shape difference distance
 
@@ -214,7 +240,9 @@ def shape_difference(
 
 
 def pattern_difference(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Pattern difference distance
 
@@ -231,7 +259,9 @@ def pattern_difference(
 
 
 def lance_williams(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Lance-Williams distance
 
@@ -255,7 +285,9 @@ def lance_williams(
 
 
 def bray_curtis(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Bray-Curtis distance
 
@@ -279,7 +311,9 @@ def bray_curtis(
 
 
 def hellinger(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Hellinger distance
 
@@ -300,7 +334,9 @@ def hellinger(
 
 
 def chord(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Hellinger distance
 
@@ -321,7 +357,9 @@ def chord(
 
 
 def yuleq(
-    x: BinaryFeatureVector, y: BinaryFeatureVector, mask: BinaryFeatureVector = None
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Yule Q distance
 

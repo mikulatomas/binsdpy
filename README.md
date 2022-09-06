@@ -58,6 +58,7 @@ binsdpy requires:
 ## Reference
 > [1] Brusco, M., Cradit, J. D., & Steinley, D. (2021). A comparison of 71 binary similarity coefficients: The effect of base rates. Plos one, 16(4), e0247751.
 https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0247751
+
 > [2] Choi, S. S., Cha, S. H., & Tappert, C. C. (2010). A survey of binary similarity and distance measures. Journal of systemics, cybernetics and informatics, 8(1), 43-48.
 http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.352.6123&rep=rep1&type=pdf
 
