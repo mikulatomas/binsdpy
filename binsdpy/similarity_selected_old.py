@@ -907,7 +907,7 @@ def pearson_heron2(
     """
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
-    float(math.cos((math.pi * math.sqrt(b * c)) / (math.sqrt(a * d) + math.sqrt(b * c))))
+    return float(math.cos((math.pi * math.sqrt(b * c)) / (math.sqrt(a * d) + math.sqrt(b * c))))
 
 
 def sokal_sneath3(
