@@ -1545,7 +1545,7 @@ def fossum(
 
     n = a + b + c + d
 
-    return (n * (a - 0.5) ** 2) / math.sqrt((a + b) * (a + c))
+    return (n * (a - 0.5) ** 2) / ((a + b) * (a + c))
 
 
 def forbes2(
