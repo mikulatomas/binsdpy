@@ -491,7 +491,7 @@ def fossum(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Fossum
+    """Fossum [Fos]
 
     Args:
         x (BinaryFeatureVector): binary feature vector
