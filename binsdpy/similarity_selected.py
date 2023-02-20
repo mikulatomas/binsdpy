@@ -17,7 +17,7 @@ def austin_colwell(
 
     Austin, Brian, and Rita R. Colwell. "Evaluation of some coefficients for use in numerical taxonomy of microorganisms." International Journal of Systematic and Evolutionary Microbiology 27, no. 3 (1977): 204-210.
 
-    - angular transformation of SMC
+    - pod nazvem angular transformation of SMC
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -89,6 +89,8 @@ def baroni_urbani_buser1(
 ) -> float:
     """Baproni-Urbani-Buser [BUB]
 
+    Baroni-Urbani, Cesare, and Mauro W. Buser. "Similarity of binary data." Systematic Zoology 25, no. 3 (1976): 251-259.
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -107,6 +109,8 @@ def baroni_urbani_buser2(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Baroni-Urbani-Buser 2 [BU2]
+
+    Baroni-Urbani, Cesare, and Mauro W. Buser. "Similarity of binary data." Systematic Zoology 25, no. 3 (1976): 251-259.
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -127,6 +131,11 @@ def cohen(
 ) -> float:
     """Cohen [Coh]
 
+    Cohen, Jacob. "A coefficient of agreement for nominal scales." Educational and psychological measurement 20, no. 1 (1960): 37-46.
+
+    - pro 2x2 situaci neni primo uveden vzorec
+    - je mozne ze vzorec neodpovida prehledovym clankum
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -145,6 +154,10 @@ def cole(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Cole [Col]
+
+    Cole, LaMont C. "The measurement of partial interspecific association." Ecology 38, no. 2 (1957): 226-233.
+
+    - presny vzorec pro 2x2 jsem nenasel
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -174,6 +187,10 @@ def cole1(
 ) -> float:
     """Cole (Cole I) [Co1]
 
+    Cole, LaMont C. "The measurement of partial interspecific association." Ecology 38, no. 2 (1957): 226-233.
+
+    - presny vzorec pro 2x2 jsem nenasel
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -192,6 +209,10 @@ def cole2(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Cole (Cole II) [Co2]
+
+    Cole, LaMont C. "The measurement of partial interspecific association." Ecology 38, no. 2 (1957): 226-233.
+
+    - presny vzorec pro 2x2 jsem nenasel
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -212,6 +233,8 @@ def consonni_todeschini1(
 ) -> float:
     """Consonni-Todeschini 1 [CT1]
 
+    Consonni, Viviana, and Roberto Todeschini. "New similarity coefficients for binary data." Match-Communications in Mathematical and Computer Chemistry 68, no. 2 (2012): 581.
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -230,6 +253,8 @@ def consonni_todeschini2(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Consonni-Todeschini 2 [CT2]
+
+    Consonni, Viviana, and Roberto Todeschini. "New similarity coefficients for binary data." Match-Communications in Mathematical and Computer Chemistry 68, no. 2 (2012): 581.
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -252,6 +277,8 @@ def consonni_todeschini3(
 ) -> float:
     """Consonni-Todeschini 3 [CT3]
 
+    Consonni, Viviana, and Roberto Todeschini. "New similarity coefficients for binary data." Match-Communications in Mathematical and Computer Chemistry 68, no. 2 (2012): 581.
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -271,6 +298,8 @@ def consonni_todeschini4(
 ) -> float:
     """Consonni-Todeschini 4 [CT4]
 
+    Consonni, Viviana, and Roberto Todeschini. "New similarity coefficients for binary data." Match-Communications in Mathematical and Computer Chemistry 68, no. 2 (2012): 581.
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -289,6 +318,8 @@ def consonni_todeschini5(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Consonni-Todeschini 5 [CT5]
+
+    Consonni, Viviana, and Roberto Todeschini. "New similarity coefficients for binary data." Match-Communications in Mathematical and Computer Chemistry 68, no. 2 (2012): 581.
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -311,6 +342,8 @@ def dennis(
 ) -> float:
     """Dennis [Den]
 
+    ???
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -329,6 +362,10 @@ def dice1(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Dice 1 [Di1]
+
+    Dice, Lee R. "Measures of the amount of ecologic association between species." Ecology 26, no. 3 (1945): 297-302.
+
+    - konkretni vzorec jsem nenasel
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -349,6 +386,10 @@ def dice2(
 ) -> float:
     """Dice 2 [Di2]
 
+    Dice, Lee R. "Measures of the amount of ecologic association between species." Ecology 26, no. 3 (1945): 297-302.
+
+    - konkretni vzorec jsem nenasel
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -361,12 +402,16 @@ def dice2(
     return a / (a + c)
 
 
-def disperson(
+def dispersion(
     x: BinaryFeatureVector,
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """disperson [dis]
+    """dispersion [dis]
+
+    ???
+
+    - pouze v review clancich zatim
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -389,6 +434,10 @@ def driver_kroeber(
 ) -> float:
     """Driver-Kroeber (Ochiai, cosine) [DK]
 
+    Driver, Harold Edson, and Alfred Louis Kroeber. Quantitative expression of cultural relationships. Vol. 31, no. 4. Berkeley: University of California Press, 1932.
+
+    - paper jsem nenasel
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -408,6 +457,10 @@ def eyraud(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Eyraud [Eyr]
+
+    Eyraud, Henri. "Les principes de la mesure des correlations." Ann. Univ. Lyon, III. Ser., Sect. A 1, no. 30-47 (1936): 111.
+
+    - paper jsem nenasel
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -432,6 +485,10 @@ def fager_mcgowan(
 ) -> float:
     """Fager-McGowan [FM]
 
+    Fager, Edward W. "Determination and analysis of recurrent groups." Ecology 38, no. 4 (1957): 586-595.
+
+    - presny vzorec nevidim
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -452,9 +509,9 @@ def faith(
 ) -> float:
     """Faith [Fai]
 
-    Faith, D. P. (1983).
-    Asymmetric binary similarity measures.
-    Oecologia, 57(3), 287-290.
+    Faith, Daniel P. "Asymmetric binary similarity measures." Oecologia 57 (1983): 287-290.
+
+    - vzorec presne v clanku
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -474,6 +531,10 @@ def forbes1(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Forbes [For]
+
+    Forbes, Stephen A. On the local distribution of certain Illinois fishes: an essay in statistical ecology. Vol. 7. Illinois State Laboratory of Natural History, 1907.
+
+    - presny vzorec nevidim
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -496,6 +557,10 @@ def forbes2(
 ) -> float:
     """Forbes 2 [Fo2]
 
+    Forbes, Stephen A. "Method of determining and measuring the associative relations of species." Science 61, no. 1585 (1925): 518-524.
+
+    - udajne, clanek jsem nenalezl
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -517,6 +582,10 @@ def fossum(
 ) -> float:
     """Fossum [Fos]
 
+    Fossum, Earl G., and Gilbert Kaskey. Optimization and standardization of information retrieval language and systems. SPERRY RAND CORP PHILADELPHIA PA UNIVAC DIV, 1966.
+
+    - vzorec jsem presne nenasel
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -537,6 +606,10 @@ def gilbert_wells(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Gilbert-Wells [GW]
+
+    Gilbert, N., and Terry CE Wells. "Analysis of quadrat data." The Journal of Ecology (1966): 675-685.
+
+    -
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -579,6 +652,14 @@ def gleason(
 ) -> float:
     """Gleason (Dice, S rensen, Czekanowski) [Gle]
 
+    Gleason, Henry Allan. "Some applications of the quadrat method." Bulletin of the Torrey Botanical Club 47, no. 1 (1920): 21-33.
+
+    - vzorec nevidim
+
+    Dice, Lee R. "Measures of the amount of ecologic association between species." Ecology 26, no. 3 (1945): 297-302.
+
+    - vzorec nevidim
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -597,6 +678,10 @@ def goodman_kruskal1(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Goodman-Kruskal I [GK1]
+
+    Goodman, Leo A., William H. Kruskal, Leo A. Goodman, and William H. Kruskal. Measures of association for cross classifications. Springer New York, 1979.
+
+    - kniha, stranu jsem zatim nenasel
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -622,6 +707,10 @@ def goodman_kruskal2(
 ) -> float:
     """Goodman-Kruskal II [GK2]
 
+    Goodman, Leo A., William H. Kruskal, Leo A. Goodman, and William H. Kruskal. Measures of association for cross classifications. Springer New York, 1979.
+
+    - kniha, stranu jsem zatim nenasel
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -640,6 +729,11 @@ def gower(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Gower [Gow]
+
+    Gower, John C., and Pierre Legendre. "Metric and Euclidean properties of dissimilarity coefficients." Journal of classification 3 (1986): 5-48.
+
+    - v clanku se vyskytuje vzorec kde je a * d misto a + d
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
