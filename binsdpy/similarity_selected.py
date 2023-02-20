@@ -7,12 +7,17 @@ from binsdpy.utils import (
     BinaryFeatureVectorEmpty,
 )
 
+
 def austin_colwell(
     x: BinaryFeatureVector,
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Austin-Colwell [AC]
+
+    Austin, Brian, and Rita R. Colwell. "Evaluation of some coefficients for use in numerical taxonomy of microorganisms." International Journal of Systematic and Evolutionary Microbiology 27, no. 3 (1977): 204-210.
+
+    - angular transformation of SMC
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -32,6 +37,10 @@ def anderberg(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Anderberg [And]
+
+    Anderberg, Michael R. "Cluster Analysis for Applications (New York and London, Academic Press)." (1973).
+
+    - p.80, 86
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -56,6 +65,10 @@ def braun_blanquet(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Braun-Banquet [BB]
+
+    Braun-Blanquet, Josias. "Plant sociology. The study of plant communities." Plant sociology. The study of plant communities. First ed. (1932).
+
+    - stranu jsem nenasel
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -142,7 +155,16 @@ def cole(
     """
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
-    return (math.sqrt(2) * (a * d - b * c)) / math.sqrt((a * d - b * c) ** 2 - (a + b) * (a + c) * (b + d) * (c + d))
+    # return (math.sqrt(2) * (a * d - b * c)) / math.sqrt(
+    #     (a * d - b * c) ** 2 - (a + b) * (a + c) * (b + d) * (c + d)
+    # )
+
+    if (a * d) >= (b * c):
+        return (a * d - b * c) / ((a + b) * (b + d))
+    elif (a * d) < (b * c) and a <= d:
+        return (a * d - b * c) / ((a + b) * (a + c))
+    else:
+        return (a * d - b * c) / ((b + d) * (c + d))
 
 
 def cole1(
@@ -300,6 +322,7 @@ def dennis(
 
     return (a * d - b * c) / math.sqrt((a + b + c + d) * (a + b) * (a + c))
 
+
 def dice1(
     x: BinaryFeatureVector,
     y: BinaryFeatureVector,
@@ -418,8 +441,9 @@ def fager_mcgowan(
     """
     a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
-    return a / math.sqrt((a + b) * (a + c)) - max(a + b, a + c) / 2
+    # return a / math.sqrt((a + b) * (a + c)) - max(a + b, a + c) / 2
 
+    return a / math.sqrt((a + b) * (a + c)) - 1 / (2 * math.sqrt(max(a + b, a + c)))
 
 def faith(
     x: BinaryFeatureVector,
@@ -522,10 +546,30 @@ def gilbert_wells(
         float: similarity of given vectors
     """
     a, b, c, d = operational_taxonomic_units(x, y, mask)
+    a, b, c, d = int(a), int(b), int(c), int(d)
 
     n = a + b + c + d
 
-    return math.log10(a) - math.log10(n) - math.log10((a + b) / n) - math.log10((a + c) / n)
+    return math.log(
+        (n**3) / (2 * math.pi * (a + b) * (a + c) * (b + d) * (c + d))
+        + 2
+        * math.log(
+            (
+                math.factorial(n)
+                * math.factorial(a)
+                * math.factorial(b)
+                * math.factorial(c)
+                * math.factorial(d)
+            )
+            / (
+                math.factorial(a + b)
+                * math.factorial(a + c)
+                * math.factorial(b + d)
+                * math.factorial(c + d)
+            )
+        )
+    )
+    # return math.log(a) - math.log(n) - math.log((a + b) / n) - math.log((a + c) / n)
 
 
 def gleason(
@@ -664,7 +708,7 @@ def hawkins_dotson(
     """
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
-    return 0.5 * (((a / (a + b + c)) + (d / (d+ b + c))))
+    return 0.5 * (((a / (a + b + c)) + (d / (d + b + c))))
 
 
 def intersection(
@@ -779,6 +823,25 @@ def kulczynski2(
     a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
     return 0.5 * ((a / (a + b)) + (a / (a + c)))
+
+
+def johnson(
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
+) -> float:
+    """Johnson [Joh]
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
+
+    return a / (a + b) + a / (a + c)
 
 
 def van_der_maarel(
@@ -974,7 +1037,9 @@ def pearson_heron2(
     """
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
-    return float(math.cos((math.pi * math.sqrt(b * c)) / (math.sqrt(a * d) + math.sqrt(b * c))))
+    return float(
+        math.cos((math.pi * math.sqrt(b * c)) / (math.sqrt(a * d) + math.sqrt(b * c)))
+    )
 
 
 def peirce1(
@@ -982,7 +1047,7 @@ def peirce1(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Peirce 1 [Pe1]
+    """Peirce 1 [Pei1]
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -1000,7 +1065,7 @@ def peirce2(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Peirce 2 [Pe2]
+    """Peirce 2 [Pei2]
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -1019,7 +1084,7 @@ def peirce3(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Peirce 3 [Pe3]
+    """Peirce 3 [Pei3]
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -1106,7 +1171,7 @@ def scott(
     """
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
-    return (4 * a * d - (b + c) ** 2) / ((2 * a + b + c) * (2 + d + b + c))
+    return (4 * a * d - (b + c) ** 2) / ((2 * a + b + c) * (2 * d + b + c))
 
 
 def simpson(
@@ -1183,6 +1248,25 @@ def sokal_sneath2(
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (2 * (a + d)) / (2 * (a + d) + b + c)
+
+
+def gower_legendre(
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
+) -> float:
+    """Gower-Legendre [GL]
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
+    a, b, c, d = operational_taxonomic_units(x, y, mask)
+
+    return (a + d) / (a + 0.5 * (b + c) + d)
 
 
 def sokal_sneath3(
@@ -1298,9 +1382,12 @@ def stiles(
 
     n = a + b + c + d
 
-    t = abs(a * d - b * c) - 0.5 * n
+    # t = abs(a * d - b * c) - 0.5 * n
+    t = abs(a * n - b * c) - 0.5 * n
 
-    return math.log10((n * t * t) / ((a + b) * (a + c) * (b + d) * (c + d)))
+    # return math.log10((n * t * t) / ((a + b) * (a + c) * (b + d) * (c + d)))
+
+    return math.log10((n * t * t) / (b * c * (n - b) * (n - c)))
 
 
 def tanimoto(
@@ -1339,6 +1426,24 @@ def tarantula(
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * (c + d)) / (c * (a + b))
+
+
+def ample(
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
+) -> float:
+    """Ample [Amp]
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
+
+    return abs(tarantula(x, y, mask))
 
 
 def tarwid(
@@ -1398,5 +1503,3 @@ def yule2(
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (math.sqrt(a * d) - math.sqrt(b * c)) / (math.sqrt(a * d) + math.sqrt(b * c))
-
-
