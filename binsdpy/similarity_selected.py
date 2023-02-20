@@ -753,6 +753,10 @@ def hamman(
 ) -> float:
     """Hamman [Ham]
 
+    Hamann, Ulrich. "Merkmalsbestand und verwandtschaftsbeziehungen der farinosae: ein beitrag zum system der monokotyledonen." Willdenowia (1961): 639-768.
+
+    - vzorec neumim overit
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -771,6 +775,10 @@ def harris_lahey(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Harris-Lahey [HL]
+
+    Harris, Francis C., and Benjamin B. Lahey. "A method for combining occurrence and nonoccurrence interobserver agreement scores." Journal of Applied Behavior Analysis 11, no. 4 (1978): 523-527.
+
+    - pro 2x2 neni primo uvedeno
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -792,6 +800,10 @@ def hawkins_dotson(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Hawkins-Dotson [HD]
+
+    Hawkins, Robert P., and Victor A. Dotson. "Reliability Scores That Delude: An Alice in Wonderland Trip Through the Misleading Characteristics of Inter-Observer Agreement Scores in Interval Recording." (1973).
+
+    - vzorec neni primo uveden
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -850,6 +862,12 @@ def jaccard(
 ) -> float:
     """Jaccard (Jaccard-Tanimoto) [Jac]
 
+    Jaccard, Paul. "Distribution de la flore alpine dans le bassin des Dranses et dans quelques régions voisines." Bull Soc Vaudoise Sci Nat 37 (1901): 241-272.
+
+    - nepodarilo se mi stahnout
+
+    Jaccard, Paul. "The distribution of the flora in the alpine zone. 1." New phytologist 11, no. 2 (1912): 37-50.
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -868,6 +886,8 @@ def sw_jaccard(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Jaccard (3W-Jaccard) [Jac3]
+
+    Jaccard, Paul. "Distribution de la flore alpine dans le bassin des Dranses et dans quelques régions voisines." Bull Soc Vaudoise Sci Nat 37 (1901): 241-272.
 
     Args:
         x (BinaryFeatureVector): binary feature vector
