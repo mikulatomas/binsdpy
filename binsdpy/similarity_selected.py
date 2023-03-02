@@ -8,6 +8,27 @@ from binsdpy.utils import (
 )
 
 
+def sw_jaccard(
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
+) -> float:
+    """3W-Jaccard [3WJ]
+
+    Jaccard, Paul. "Distribution de la flore alpine dans le bassin des Dranses et dans quelques régions voisines." Bull Soc Vaudoise Sci Nat 37 (1901): 241-272.
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
+
+    return (3 * a) / (3 * a + b + c)
+
+
 def austin_colwell(
     x: BinaryFeatureVector,
     y: BinaryFeatureVector,
@@ -87,7 +108,7 @@ def baroni_urbani_buser1(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Baproni-Urbani-Buser [BUB]
+    """Baproni-Urbani-Buser 1 [BU1]
 
     Baroni-Urbani, Cesare, and Mauro W. Buser. "Similarity of binary data." Systematic Zoology 25, no. 3 (1976): 251-259.
 
@@ -155,9 +176,7 @@ def cole(
 ) -> float:
     """Cole [Col]
 
-    Cole, LaMont C. "The measurement of partial interspecific association." Ecology 38, no. 2 (1957): 226-233.
-
-    - presny vzorec pro 2x2 jsem nenasel
+    Cole, LaMont C. "The measurement of interspecific associaton." _Ecology_ (1949): 411-424.
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -167,10 +186,6 @@ def cole(
         float: similarity of given vectors
     """
     a, b, c, d = operational_taxonomic_units(x, y, mask)
-
-    # return (math.sqrt(2) * (a * d - b * c)) / math.sqrt(
-    #     (a * d - b * c) ** 2 - (a + b) * (a + c) * (b + d) * (c + d)
-    # )
 
     if (a * d) >= (b * c):
         return (a * d - b * c) / ((a + b) * (b + d))
@@ -185,11 +200,9 @@ def cole1(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Cole (Cole I) [Co1]
+    """Cole 1 [Co1]
 
-    Cole, LaMont C. "The measurement of partial interspecific association." Ecology 38, no. 2 (1957): 226-233.
-
-    - presny vzorec pro 2x2 jsem nenasel
+    Cole, LaMont C. "The measurement of interspecific associaton." _Ecology_ (1949): 411-424.
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -208,11 +221,9 @@ def cole2(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Cole (Cole II) [Co2]
+    """Cole 2 [Co2]
 
-    Cole, LaMont C. "The measurement of partial interspecific association." Ecology 38, no. 2 (1957): 226-233.
-
-    - presny vzorec pro 2x2 jsem nenasel
+    Cole, LaMont C. "The measurement of interspecific associaton." _Ecology_ (1949): 411-424.
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -224,6 +235,30 @@ def cole2(
     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
     return (a * d - b * c) / ((a + b) * (b + d))
+
+
+def cosine(
+    x: BinaryFeatureVector,
+    y: BinaryFeatureVector,
+    mask: BinaryFeatureVectorEmpty = None,
+) -> float:
+    """cosine (Driver-Kroeber, Ochiai) [cos]
+
+    Driver, Harold Edson, and Alfred Louis Kroeber. Quantitative expression of cultural relationships. Vol. 31, no. 4. Berkeley: University of California Press, 1932.
+
+    - paper jsem nenasel
+
+    Args:
+        x (BinaryFeatureVector): binary feature vector
+        y (BinaryFeatureVector): binary feature vector
+
+    Returns:
+        float: similarity of given vectors
+    """
+
+    a, b, c, _ = operational_taxonomic_units(x, y, mask)
+
+    return a / math.sqrt((a + b) * (a + c))
 
 
 def consonni_todeschini1(
@@ -427,30 +462,6 @@ def dispersion(
     return (a * d - b * c) / (n * n)
 
 
-def driver_kroeber(
-    x: BinaryFeatureVector,
-    y: BinaryFeatureVector,
-    mask: BinaryFeatureVectorEmpty = None,
-) -> float:
-    """Driver-Kroeber (Ochiai, cosine) [DK]
-
-    Driver, Harold Edson, and Alfred Louis Kroeber. Quantitative expression of cultural relationships. Vol. 31, no. 4. Berkeley: University of California Press, 1932.
-
-    - paper jsem nenasel
-
-    Args:
-        x (BinaryFeatureVector): binary feature vector
-        y (BinaryFeatureVector): binary feature vector
-
-    Returns:
-        float: similarity of given vectors
-    """
-
-    a, b, c, _ = operational_taxonomic_units(x, y, mask)
-
-    return a / math.sqrt((a + b) * (a + c))
-
-
 def eyraud(
     x: BinaryFeatureVector,
     y: BinaryFeatureVector,
@@ -486,8 +497,7 @@ def fager_mcgowan(
     """Fager-McGowan [FM]
 
     Fager, Edward W. "Determination and analysis of recurrent groups." Ecology 38, no. 4 (1957): 586-595.
-
-    - presny vzorec nevidim
+    Fager, Edward W., and John A. McGowan. "Zooplankton Species Groups in the North Pacific: Co-occurrences of species can be used to derive groups whose members react similarly to water-mass types." Science 140, no. 3566 (1963): 453-460.
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -497,8 +507,6 @@ def fager_mcgowan(
         float: similarity of given vectors
     """
     a, b, c, _ = operational_taxonomic_units(x, y, mask)
-
-    # return a / math.sqrt((a + b) * (a + c)) - max(a + b, a + c) / 2
 
     return a / math.sqrt((a + b) * (a + c)) - 1 / (2 * math.sqrt(max(a + b, a + c)))
 
@@ -642,7 +650,6 @@ def gilbert_wells(
             )
         )
     )
-    # return math.log(a) - math.log(n) - math.log((a + b) / n) - math.log((a + c) / n)
 
 
 def gleason(
@@ -650,7 +657,7 @@ def gleason(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Gleason (Dice, S rensen, Czekanowski) [Gle]
+    """Gleason (Dice, Sorensen, Czekanowski) [Gle]
 
     Gleason, Henry Allan. "Some applications of the quadrat method." Bulletin of the Torrey Botanical Club 47, no. 1 (1920): 21-33.
 
@@ -677,7 +684,7 @@ def goodman_kruskal1(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Goodman-Kruskal I [GK1]
+    """Goodman-Kruskal 1 [GK1]
 
     Goodman, Leo A., William H. Kruskal, Leo A. Goodman, and William H. Kruskal. Measures of association for cross classifications. Springer New York, 1979.
 
@@ -705,7 +712,7 @@ def goodman_kruskal2(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Goodman-Kruskal II [GK2]
+    """Goodman-Kruskal 2 [GK2]
 
     Goodman, Leo A., William H. Kruskal, Leo A. Goodman, and William H. Kruskal. Measures of association for cross classifications. Springer New York, 1979.
 
@@ -822,7 +829,7 @@ def intersection(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Intersection [Int]
+    """Intersection [int]
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -841,7 +848,7 @@ def inner_product(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """inner product [Ip]
+    """inner product [ip]
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -880,33 +887,16 @@ def jaccard(
     return a / (a + b + c)
 
 
-def sw_jaccard(
-    x: BinaryFeatureVector,
-    y: BinaryFeatureVector,
-    mask: BinaryFeatureVectorEmpty = None,
-) -> float:
-    """Jaccard (3W-Jaccard) [Jac3]
-
-    Jaccard, Paul. "Distribution de la flore alpine dans le bassin des Dranses et dans quelques régions voisines." Bull Soc Vaudoise Sci Nat 37 (1901): 241-272.
-
-    Args:
-        x (BinaryFeatureVector): binary feature vector
-        y (BinaryFeatureVector): binary feature vector
-
-    Returns:
-        float: similarity of given vectors
-    """
-    a, b, c, _ = operational_taxonomic_units(x, y, mask)
-
-    return (3 * a) / (3 * a + b + c)
-
-
 def kulczynski1(
     x: BinaryFeatureVector,
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Kulczynski 1 [Ku1]
+
+    Kulczynski, S. "Die Pflanzenassoziationen der Pieninen." Bulletin International de l’Academie Polonaise des Sciences et des Lettres, Classe des Sciences Mathematiques et Naturelles, B (Sciences Naturelles) II (1927): 57-203.
+
+    - nepodarilo se mi stahnout
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -925,7 +915,11 @@ def kulczynski2(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Kulczynski 2 (Kulczynski II, Driver-Kroeber) [Ku2]
+    """Kulczynski 2 [Ku2]
+
+    Kulczynski, S. "Die Pflanzenassoziationen der Pieninen." Bulletin International de l’Academie Polonaise des Sciences et des Lettres, Classe des Sciences Mathematiques et Naturelles, B (Sciences Naturelles) II (1927): 57-203.
+
+    - nepodarilo se mi stahnout
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -939,23 +933,25 @@ def kulczynski2(
     return 0.5 * ((a / (a + b)) + (a / (a + c)))
 
 
-def johnson(
-    x: BinaryFeatureVector,
-    y: BinaryFeatureVector,
-    mask: BinaryFeatureVectorEmpty = None,
-) -> float:
-    """Johnson [Joh]
+# def johnson(
+#     x: BinaryFeatureVector,
+#     y: BinaryFeatureVector,
+#     mask: BinaryFeatureVectorEmpty = None,
+# ) -> float:
+#     """Johnson [Joh]
 
-    Args:
-        x (BinaryFeatureVector): binary feature vector
-        y (BinaryFeatureVector): binary feature vector
+#     Johnson, Stephen C. "Hierarchical clustering schemes." Psychometrika 32, no. 3 (1967): 241-254.
 
-    Returns:
-        float: similarity of given vectors
-    """
-    a, b, c, _ = operational_taxonomic_units(x, y, mask)
+#     Args:
+#         x (BinaryFeatureVector): binary feature vector
+#         y (BinaryFeatureVector): binary feature vector
 
-    return a / (a + b) + a / (a + c)
+#     Returns:
+#         float: similarity of given vectors
+#     """
+#     a, b, c, _ = operational_taxonomic_units(x, y, mask)
+
+#     return a / (a + b) + a / (a + c)
 
 
 def van_der_maarel(
@@ -964,6 +960,10 @@ def van_der_maarel(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """van der Maarel [Maa]
+
+    van der Maarel, Eddy. "On the use of ordination models in phytosociology." Vegetatio 19 (1969): 21-46.
+
+    - pro 2x2 neni uvedeno
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -984,6 +984,10 @@ def maxwell_pilliner(
 ) -> float:
     """Maxwell-Pilliner [MP]
 
+    Maxwell, A. E., and A. E. G. Pilliner. "Deriving coefficients of reliability and agreement for ratings." British Journal of Mathematical and Statistical Psychology 21, no. 1 (1968): 105-116.
+
+    - pro 2x2 neni uvedeno
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -1002,6 +1006,10 @@ def mcconnaughey(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """McConnaughey [McC]
+
+    McConnaughey, Bayard Harlow. The determination and analysis of plankton communities. Lembaga Penelitian Laut, 1964.
+
+    - clanek jsem nenasel
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -1022,6 +1030,10 @@ def michael(
 ) -> float:
     """Michael [Mic]
 
+    Michael, Ellis L. "Marine ecology and the coefficient of association: a plea in behalf of quantitative biology." Journal of Ecology 8, no. 1 (1920): 54-59.
+
+    - pro 2x2 neni uvedeno
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -1041,6 +1053,10 @@ def mountford(
 ) -> float:
     """Mountford [Mou]
 
+    Mountford, M. D. "An index of similarity and its application to classification problems." Progress in soil zoology (1962): 43-50.
+
+    - clanek jsem nenasel
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -1059,6 +1075,8 @@ def pearson1(
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
     """Pearson 1 [Pe1]
+
+    Pearson, Karl, and David Heron. "On theories of association." Biometrika 9, no. 1/2 (1913): 159-315.
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -1100,7 +1118,7 @@ def pearson_heron1(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Pearson-Heron (Phi) [PH1]
+    """Pearson-Heron 1 (Phi) [PH1]
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -1161,7 +1179,7 @@ def peirce1(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Peirce 1 [Pei1]
+    """Peirce 1 [Pr1]
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -1179,7 +1197,7 @@ def peirce2(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Peirce 2 [Pei2]
+    """Peirce 2 [Pr2]
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -1198,7 +1216,7 @@ def peirce3(
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Peirce 3 [Pei3]
+    """Peirce 3 [Pr3]
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -1364,23 +1382,23 @@ def sokal_sneath2(
     return (2 * (a + d)) / (2 * (a + d) + b + c)
 
 
-def gower_legendre(
-    x: BinaryFeatureVector,
-    y: BinaryFeatureVector,
-    mask: BinaryFeatureVectorEmpty = None,
-) -> float:
-    """Gower-Legendre [GL]
+# def gower_legendre(
+#     x: BinaryFeatureVector,
+#     y: BinaryFeatureVector,
+#     mask: BinaryFeatureVectorEmpty = None,
+# ) -> float:
+#     """Gower-Legendre [GL]
 
-    Args:
-        x (BinaryFeatureVector): binary feature vector
-        y (BinaryFeatureVector): binary feature vector
+#     Args:
+#         x (BinaryFeatureVector): binary feature vector
+#         y (BinaryFeatureVector): binary feature vector
 
-    Returns:
-        float: similarity of given vectors
-    """
-    a, b, c, d = operational_taxonomic_units(x, y, mask)
+#     Returns:
+#         float: similarity of given vectors
+#     """
+#     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
-    return (a + d) / (a + 0.5 * (b + c) + d)
+#     return (a + d) / (a + 0.5 * (b + c) + d)
 
 
 def sokal_sneath3(
@@ -1421,12 +1439,12 @@ def sokal_sneath4(
     return a / math.sqrt((a + b) * (a + c)) * d / math.sqrt((b + d) * (c + d))
 
 
-def sokal_sneath3a(
+def sokal_sneath5(
     x: BinaryFeatureVector,
     y: BinaryFeatureVector,
     mask: BinaryFeatureVectorEmpty = None,
 ) -> float:
-    """Sokal-Sneath 3a [SS3a]
+    """Sokal-Sneath 5 [SS5]
 
     Args:
         x (BinaryFeatureVector): binary feature vector
@@ -1440,23 +1458,23 @@ def sokal_sneath3a(
     return (a + d) / (b + c)
 
 
-def sokal_sneath4a(
-    x: BinaryFeatureVector,
-    y: BinaryFeatureVector,
-    mask: BinaryFeatureVectorEmpty = None,
-) -> float:
-    """Sokal-Sneath 4a (Ochiai) [SS4a]
+# def sokal_sneath4a(
+#     x: BinaryFeatureVector,
+#     y: BinaryFeatureVector,
+#     mask: BinaryFeatureVectorEmpty = None,
+# ) -> float:
+#     """Sokal-Sneath 4a (Ochiai) [SS4a]
 
-    Args:
-        x (BinaryFeatureVector): binary feature vector
-        y (BinaryFeatureVector): binary feature vector
+#     Args:
+#         x (BinaryFeatureVector): binary feature vector
+#         y (BinaryFeatureVector): binary feature vector
 
-    Returns:
-        float: similarity of given vectors
-    """
-    a, b, c, d = operational_taxonomic_units(x, y, mask)
+#     Returns:
+#         float: similarity of given vectors
+#     """
+#     a, b, c, d = operational_taxonomic_units(x, y, mask)
 
-    return (a * d) / math.sqrt((a + b) * (a + c) * (b + d) * (c + d))
+#     return (a * d) / math.sqrt((a + b) * (a + c) * (b + d) * (c + d))
 
 
 def sorgenfrei(
@@ -1485,6 +1503,8 @@ def stiles(
 ) -> float:
     """Stiles [Sti]
 
+    Stiles, H. Edmund. "The association factor in information retrieval." Journal of the ACM (JACM) 8, no. 2 (1961): 271-279.
+
     Args:
         x (BinaryFeatureVector): binary feature vector
         y (BinaryFeatureVector): binary feature vector
@@ -1496,31 +1516,28 @@ def stiles(
 
     n = a + b + c + d
 
-    # t = abs(a * d - b * c) - 0.5 * n
     t = abs(a * n - b * c) - 0.5 * n
-
-    # return math.log10((n * t * t) / ((a + b) * (a + c) * (b + d) * (c + d)))
 
     return math.log10((n * t * t) / (b * c * (n - b) * (n - c)))
 
 
-def tanimoto(
-    x: BinaryFeatureVector,
-    y: BinaryFeatureVector,
-    mask: BinaryFeatureVectorEmpty = None,
-) -> float:
-    """Tanimoto [Tan]
+# def tanimoto(
+#     x: BinaryFeatureVector,
+#     y: BinaryFeatureVector,
+#     mask: BinaryFeatureVectorEmpty = None,
+# ) -> float:
+#     """Tanimoto [Tan]
 
-    Args:
-        x (BinaryFeatureVector): binary feature vector
-        y (BinaryFeatureVector): binary feature vector
+#     Args:
+#         x (BinaryFeatureVector): binary feature vector
+#         y (BinaryFeatureVector): binary feature vector
 
-    Returns:
-        float: similarity of given vectors
-    """
-    a, b, c, _ = operational_taxonomic_units(x, y, mask)
+#     Returns:
+#         float: similarity of given vectors
+#     """
+#     a, b, c, _ = operational_taxonomic_units(x, y, mask)
 
-    return a / ((a + b) + (a + c) - a)
+#     return a / ((a + b) + (a + c) - a)
 
 
 def tarantula(
@@ -1542,22 +1559,22 @@ def tarantula(
     return (a * (c + d)) / (c * (a + b))
 
 
-def ample(
-    x: BinaryFeatureVector,
-    y: BinaryFeatureVector,
-    mask: BinaryFeatureVectorEmpty = None,
-) -> float:
-    """Ample [Amp]
+# def ample(
+#     x: BinaryFeatureVector,
+#     y: BinaryFeatureVector,
+#     mask: BinaryFeatureVectorEmpty = None,
+# ) -> float:
+#     """Ample [Amp]
 
-    Args:
-        x (BinaryFeatureVector): binary feature vector
-        y (BinaryFeatureVector): binary feature vector
+#     Args:
+#         x (BinaryFeatureVector): binary feature vector
+#         y (BinaryFeatureVector): binary feature vector
 
-    Returns:
-        float: similarity of given vectors
-    """
+#     Returns:
+#         float: similarity of given vectors
+#     """
 
-    return abs(tarantula(x, y, mask))
+#     return abs(tarantula(x, y, mask))
 
 
 def tarwid(
