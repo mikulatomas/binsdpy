@@ -22,7 +22,10 @@ def operational_taxonomic_units(
     Returns:
         typing.Tuple[float, float, float, float]: values from the table
     """
-    if isinstance(x, np.ndarray):
+    if isinstance(x, np.ndarray) and isinstance(y, np.ndarray):
+        if x.dtype != bool or y.dtype != bool:
+            raise TypeError("Only bool dtype is supported.")
+
         if mask is None:
             not_x = np.invert(x)
             not_y = np.invert(y)
@@ -37,7 +40,7 @@ def operational_taxonomic_units(
         b = np.count_nonzero(not_x & y)
         c = np.count_nonzero(x & not_y)
         d = np.count_nonzero(not_x & not_y)
-    elif isinstance(x, bitsets.bases.MemberBits):
+    elif isinstance(x, bitsets.bases.MemberBits) and isinstance(y, bitsets.bases.MemberBits):
         Vector = type(x)
         universum = Vector.supremum
 
